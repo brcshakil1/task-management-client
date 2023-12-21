@@ -1,29 +1,32 @@
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { FaPlus } from "react-icons/fa6";
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
-  const { email, displayName, photoURL } = user;
+
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
     <div>
-      {user ? (
+      {user?.email ? (
         <div className="w-full flex min-h-screen">
-          <div className="w-3/12 bg-red-300 px-5 py-14 ">
+          <div className="w-2/12 px-5 py-14 ">
             <div>
               <img
-                src={photoURL}
+                src={user?.photoURL}
                 className="rounded-full border-4"
-                alt={displayName}
+                alt={user?.displayName}
               />
-              <h3 className="text-xl font-bold">{displayName}</h3>
-              <p>{email}</p>
+              <h3 className="text-xl font-bold">{user?.displayName}</h3>
+              <p>{user?.email}</p>
             </div>
             <ul className="pt-2">
-              <NavLink to="create-tasks" className="">
-                <li className=" ">Create new tasks</li>
+              <NavLink to="create-tasks" className=" ">
+                <li className="flex justify-center items-center gap-2 border py-2  ">
+                  <FaPlus /> <span>Add new tasks</span>
+                </li>
               </NavLink>
               <NavLink to="previous-tasks" className="">
                 <li className="">See previous tasks</li>
@@ -34,7 +37,7 @@ const Dashboard = () => {
               </NavLink>
             </ul>
           </div>
-          <div className="w-9/12 bg-green-500 py-20 px-5">
+          <div className="w-9/12 py-20 px-5">
             <Outlet />
           </div>
         </div>
