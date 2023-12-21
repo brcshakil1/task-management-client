@@ -199,8 +199,10 @@ const Navbar = () => {
         {/* login modal */}
         {/* Open the modal using document.getElementById('ID').showModal() method */}
         <dialog id="my_modal_2" className="modal">
-          <div className="modal-box text-black">
-            <Login />
+          <div className="modal-box w-11/12 max-w-5xl h-auto">
+            <div>
+              <Login />
+            </div>
           </div>
           <form method="dialog" className="modal-backdrop">
             <button>close</button>
