@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   signOut,
   updateProfile,
+  GithubAuthProvider,
 } from "firebase/auth";
 import PropTypes from "prop-types";
 
@@ -20,6 +21,7 @@ const AuthProvider = ({ children }) => {
 
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   const createUser = (email, pass) => {
     setLoading(true);
@@ -31,15 +33,17 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, pass);
   };
 
-  const signInWithGoogle = () => {
+  const googleSignIn = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
+  };
+  const githubSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubProvider);
   };
 
   const logout = async () => {
     setLoading(true);
-    // remove token from local storage
-    localStorage.removeItem("access-token");
     return signOut(auth);
   };
 
@@ -65,7 +69,8 @@ const AuthProvider = ({ children }) => {
     loading,
     createUser,
     signInUser,
-    signInWithGoogle,
+    googleSignIn,
+    githubSignIn,
     logout,
     updateUserProfile,
   };
