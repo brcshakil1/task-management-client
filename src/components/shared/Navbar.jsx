@@ -24,9 +24,9 @@ const Navbar = () => {
         <NavLink
           className="lg:text-black hover:text-[#9F99AA]"
           onClick={() => setIsTrue(false)}
-          to="/assignments"
+          to="/contact"
         >
-          Tasks
+          Contact us
         </NavLink>
       </li>
 
@@ -75,7 +75,7 @@ const Navbar = () => {
   return (
     <div>
       <Container>
-        <div className="navbar text-black  border-b border-[#2b1e4e] px-0">
+        <div className="navbar text-black  px-0">
           <div className="navbar-start flex-grow">
             <div>
               <label
@@ -156,9 +156,9 @@ const Navbar = () => {
                         <NavLink
                           className="text-[#221546]"
                           onClick={() => setProfileIsTrue(false)}
-                          to="/my-assignment"
+                          to="/dashboard"
                         >
-                          My Assignment
+                          Dashboard
                         </NavLink>
                       </li>
                       <li

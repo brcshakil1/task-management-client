@@ -8,6 +8,8 @@ import CreateNewTasks from "../pages/Dashboard/CreateNewTasks/CreateNewTasks";
 import PreviousTasks from "../pages/Dashboard/PreviousTasks/PreviousTasks";
 import EditTask from "../pages/Dashboard/EditTask/EditTask";
 import ManageTasks from "../pages/Dashboard/ManageTasks/ManageTasks";
+import PrivetRout from "./PrivetRoute";
+import ContactUS from "../pages/ContactUs/ContactUs";
 
 const Router = createBrowserRouter([
   {
@@ -17,6 +19,10 @@ const Router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUS />,
       },
       {
         path: "/login",
@@ -30,7 +36,11 @@ const Router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivetRout>
+        <Dashboard />
+      </PrivetRout>
+    ),
     children: [
       {
         path: "/dashboard/create-tasks",

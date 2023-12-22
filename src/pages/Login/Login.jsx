@@ -2,12 +2,12 @@ import login_img from "../../assets/images/login.jpg";
 import { BsGithub, BsGoogle } from "react-icons/bs";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Container from "../../components/ui/Container";
 
 const Login = () => {
   const { signInUser, googleSignIn, githubSignIn } = useAuth();
-
+  const location = useLocation();
   const navigate = useNavigate();
 
   //   login user
