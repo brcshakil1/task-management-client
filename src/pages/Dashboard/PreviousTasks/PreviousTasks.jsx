@@ -3,6 +3,7 @@ import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import SectionTitle from "../../../components/ui/SectionTitle";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const PreviousTasks = () => {
   const { user } = useAuth();
@@ -56,7 +57,9 @@ const PreviousTasks = () => {
                 <p>Priority: {task?.priority}</p>
                 <p>Deadline: {task?.date}</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Edit</button>
+                  <Link to={`/dashboard/edit-task/${task?._id}`}>
+                    <button className="btn btn-primary">Edit</button>
+                  </Link>
                   <button
                     onClick={() => handleDeleteTask(task?._id)}
                     className="btn btn-ghost text-red-400"

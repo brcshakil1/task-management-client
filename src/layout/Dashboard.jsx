@@ -4,6 +4,7 @@ import { FaHouseMedical, FaPlus } from "react-icons/fa6";
 import { SiTask } from "react-icons/si";
 import { RiMenu2Line } from "react-icons/ri";
 import { useState } from "react";
+import { MdManageHistory } from "react-icons/md";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,7 @@ const Dashboard = () => {
                   <div className="flex justify-center items-center text-center flex-col">
                     <img
                       src={user?.photoURL}
-                      className="rounded-full border-b-4 border-r-0 md:border-b-0 md:border-r-4 h-14 w-14 md:w-24 md:h-24"
+                      className="rounded-full border-[3px] border-slate-500 h-14 w-14 md:w-24 md:h-24"
                       alt={user?.displayName}
                     />
                     <h3 className="text-xl  font-bold">{user?.displayName}</h3>
@@ -56,12 +57,20 @@ const Dashboard = () => {
                         <FaPlus /> <span>Add new tasks</span>
                       </li>
                     </NavLink>
-                    <NavLink to="previous-tasks" className=" ">
+                    <NavLink to="previous-tasks" className="">
                       <li
                         className="flex justify-center items-center gap-2 mt-2
                        border-slate-400 border px-3 py-2  "
                       >
                         <SiTask /> <span>Your Previous Tasks</span>
+                      </li>
+                    </NavLink>
+                    <NavLink to="manage-tasks" className="">
+                      <li
+                        className="flex justify-center items-center gap-2 mt-2
+                       border-slate-400 border px-3 py-2  "
+                      >
+                        <MdManageHistory /> <span>Manage your task</span>
                       </li>
                     </NavLink>
                     <NavLink to="" className="">

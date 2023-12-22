@@ -1,43 +1,48 @@
-import SectionTitle from "./../../../components/ui/SectionTitle";
-
-import "react-datepicker/dist/react-datepicker.css";
-import { useForm } from "react-hook-form";
-import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+// import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import SectionTitle from "../../../components/ui/SectionTitle";
 import toast from "react-hot-toast";
 
-const CreateNewTasks = () => {
-  const { user, loading } = useAuth();
+const EditTask = () => {
+  const { id } = useParams();
+  const navigation = useNavigate();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm();
-  const onSubmit = (data) => {
+
+  const onSubmit = async (data) => {
     const task = {
       ...data,
-      status: "to-do",
-      name: user?.displayName,
-      userEmail: user?.email,
     };
 
-    axios.post("http://localhost:3000/tasks", task).then((res) => {
-      console.log(res.data);
-      if (res.data.insertedId) {
-        toast.success("You've successfully created a new task!");
-        reset();
-      }
-    });
+    const res = await axios.patch(`http://localhost:3000/tasks/${id}`, task);
+
+    if (res.data.modifiedCount) {
+      toast.success("Successfully updated task!");
+      navigation("/dashboard/previous-tasks");
+    }
   };
 
-  if (loading) {
+  const { data, isPending } = useQuery({
+    queryKey: ["task"],
+    queryFn: async () => {
+      const res = await axios.get(`http://localhost:3000/tasks/${id}`);
+      return res.data;
+    },
+  });
+
+  if (isPending) {
     return <div>loading...</div>;
   }
-
   return (
     <div>
-      <SectionTitle title="Create New Tasks" />
+      <SectionTitle title="Edit Task" />
       <div className="border p-5 my-5">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
@@ -50,6 +55,7 @@ const CreateNewTasks = () => {
               type="text"
               placeholder="title"
               name="title"
+              defaultValue={data?.title}
               className="input input-ed rounded-sm border-2 border-gray-500"
               required
               {...register("title", { required: true })}
@@ -69,6 +75,7 @@ const CreateNewTasks = () => {
               className="p-3 border-2 border-gray-500 "
               name="description"
               placeholder="description"
+              defaultValue={data?.description}
               required
               {...register("description")}
             ></textarea>
@@ -83,7 +90,7 @@ const CreateNewTasks = () => {
               <select
                 className="input rounded-sm border-2 border-gray-500"
                 name="priority"
-                defaultValue="low"
+                defaultValue={data?.priority}
                 id="priority"
                 required
                 {...register("priority")}
@@ -103,6 +110,7 @@ const CreateNewTasks = () => {
                 type="date"
                 placeholder="date"
                 name="date"
+                defaultValue={data?.date}
                 className="input rounded-sm border-2 border-gray-500"
                 required
                 {...register("date")}
@@ -115,7 +123,7 @@ const CreateNewTasks = () => {
               className="btn hover:bg-blue-500 bg-[#3144D7]
              font-semibold text-white border-none"
             >
-              Create Task
+              Submit
             </button>
           </div>
         </form>
@@ -124,4 +132,4 @@ const CreateNewTasks = () => {
   );
 };
 
-export default CreateNewTasks;
+export default EditTask;

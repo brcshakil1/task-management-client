@@ -6,6 +6,8 @@ import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../layout/Dashboard";
 import CreateNewTasks from "../pages/Dashboard/CreateNewTasks/CreateNewTasks";
 import PreviousTasks from "../pages/Dashboard/PreviousTasks/PreviousTasks";
+import EditTask from "../pages/Dashboard/EditTask/EditTask";
+import ManageTasks from "../pages/Dashboard/ManageTasks/ManageTasks";
 
 const Router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const Router = createBrowserRouter([
       {
         path: "/dashboard/previous-tasks",
         element: <PreviousTasks />,
+      },
+      {
+        path: "/dashboard/edit-task/:id",
+        element: <EditTask />,
+      },
+      {
+        path: "/dashboard/manage-tasks",
+        element: <ManageTasks />,
       },
     ],
   },
