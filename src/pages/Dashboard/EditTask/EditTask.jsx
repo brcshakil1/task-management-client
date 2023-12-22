@@ -21,7 +21,10 @@ const EditTask = () => {
       ...data,
     };
 
-    const res = await axios.patch(`http://localhost:3000/tasks/${id}`, task);
+    const res = await axios.patch(
+      `https://task-management-server-eight-weld.vercel.app/tasks/${id}`,
+      task
+    );
 
     if (res.data.modifiedCount) {
       toast.success("Successfully updated task!");
@@ -32,7 +35,9 @@ const EditTask = () => {
   const { data, isPending } = useQuery({
     queryKey: ["task"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/tasks/${id}`);
+      const res = await axios.get(
+        `https://task-management-server-eight-weld.vercel.app/tasks/${id}`
+      );
       return res.data;
     },
   });

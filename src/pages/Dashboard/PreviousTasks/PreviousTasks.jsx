@@ -12,7 +12,7 @@ const PreviousTasks = () => {
     queryKey: ["all-matched-tasks"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/tasks?email=${user?.email}`
+        `https://task-management-server-eight-weld.vercel.app/tasks?email=${user?.email}`
       );
       return res.data;
     },
@@ -30,16 +30,20 @@ const PreviousTasks = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/tasks/${id}`).then((res) => {
-          if (res.data.deletedCount) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-            refetch();
-          }
-        });
+        axios
+          .delete(
+            `https://task-management-server-eight-weld.vercel.app/tasks/${id}`
+          )
+          .then((res) => {
+            if (res.data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              refetch();
+            }
+          });
       }
     });
   };

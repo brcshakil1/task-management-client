@@ -9,7 +9,7 @@ const useTasks = () => {
     queryKey: ["all-matched-tasks"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/tasks?email=${user?.email}`
+        `https://task-management-server-eight-weld.vercel.app/tasks?email=${user?.email}`
       );
       return res.data;
     },

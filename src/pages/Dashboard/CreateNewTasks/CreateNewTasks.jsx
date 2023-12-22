@@ -22,13 +22,15 @@ const CreateNewTasks = () => {
       userEmail: user?.email,
     };
 
-    axios.post("http://localhost:3000/tasks", task).then((res) => {
-      console.log(res.data);
-      if (res.data.insertedId) {
-        toast.success("You've successfully created a new task!");
-        reset();
-      }
-    });
+    axios
+      .post("https://task-management-server-eight-weld.vercel.app/tasks", task)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          toast.success("You've successfully created a new task!");
+          reset();
+        }
+      });
   };
 
   if (loading) {
