@@ -38,13 +38,13 @@ const Dashboard = () => {
             >
               <div className="w-full flex ">
                 <div className=" px-5 py-6 md:py-14 ">
-                  <div className="flex justify-center items-center flex-col">
+                  <div className="flex justify-center items-center text-center flex-col">
                     <img
                       src={user?.photoURL}
                       className="rounded-full border-b-4 border-r-0 md:border-b-0 md:border-r-4 h-14 w-14 md:w-24 md:h-24"
                       alt={user?.displayName}
                     />
-                    <h3 className="text-xl font-bold">{user?.displayName}</h3>
+                    <h3 className="text-xl  font-bold">{user?.displayName}</h3>
                     <p>{user?.email}</p>
                   </div>
                   <ul className="pt-2">
